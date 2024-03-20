@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Land Rover Model Selector</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #F2F2F2; /* Light gray background */
+        }
+        h1, h2 {
+            text-align: center;
+            color: #004D40; /* Dark green for headings */
+        }
+        #questions {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #FFFFFF; /* White background for questions */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for container */
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #004D40; /* Dark green button background */
+            color: #FFFFFF; /* White text color for buttons */
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease; /* Smooth transition for button hover */
+        }
+        button:hover {
+            background-color: #00695C; /* Dark green hover color */
+        }
+        #result {
+            margin-top: 20px;
+            text-align: center;
+            background-color: #FFFFFF;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Land Rover Model Selector</h1>
+    <div id="questions">
+        <div id="question1">
+            <h2>Question 1</h2>
+            <p>Imagine you're in a room filled with objects. Are you initially drawn to the luxurious velvet armchair in the corner, or do you find yourself captivated by the sleek, modern sculpture on the table?</p>
+            <button onclick="choose('armchair')">Luxurious Velvet Armchair</button>
+            <button onclick="choose('sculpture')">Sleek Modern Sculpture</button>
+        </div>
+        <div id="question2" style="display: none;">
+            <h2>Question 2</h2>
+            <p>Among the luxurious items, do you see yourself more inclined towards a classic and refined piece, or are you attracted to modern gadgets and cutting-edge technology?</p>
+            <button onclick="choose('clock')">Classic and Refined Piece</button>
+            <button onclick="choose('gadgets')">Modern Gadgets and Technology</button>
+        </div>
+        <div id="question3" style="display: none;">
+            <h2>Question 3</h2>
+            <p>Now, envision yourself strolling through a vibrant city. Are you mesmerized by the urban skyline reflected in the polished storefront window, or do you envision packing a sleek, modern suitcase for an adventurous weekend trip?</p>
+            <button onclick="choose('cityscape')">Urban Skyline</button>
+            <button onclick="choose('suitcase')">Sleek Modern Suitcase</button>
+        </div>
+        <div id="question4" style="display: none;">
+            <h2>Question 4</h2>
+            <p>Visualize yourself in a rugged landscape. Do you see yourself conquering challenging trails and navigating through rough terrain, or are you picturing a spacious room ready to accommodate your family's every need?</p>
+            <button onclick="showResult('boots')">Challenging Trails</button>
+            <button onclick="showResult('backpack')">Family's Every Need</button>
+        </div>
+        <div id="result" style="display: none;">
+            <h2>Result</h2>
+            <p id="resultText"></p>
+            <p id="serviceRecommendation"></p>
+            <button onclick="restart()">Try Again</button>
+        </div>
+    </div>
+
+    <script>
+        var choices = [];
+        
+        function choose(choice) {
+            choices.push(choice);
+            if (choices.length === 1) {
+                document.getElementById('question1').style.display = 'none';
+                document.getElementById('question2').style.display = 'block';
+            } else if (choices.length === 2) {
+                document.getElementById('question2').style.display = 'none';
+                document.getElementById('question3').style.display = 'block';
+            } else if (choices.length === 3) {
+                document.getElementById('question3').style.display = 'none';
+                document.getElementById('result').style.display = 'block';
+                showResult();
+            }
+        }
+
+        function showResult() {
+            var resultText = document.getElementById('resultText');
+            var serviceRecommendation = document.getElementById('serviceRecommendation');
+            
+            switch (choices.join(' ')) {
+                case 'armchair clock cityscape':
+                    resultText.innerHTML = "Congratulations! Based on your preference for timeless luxury and refined elegance, we recommend the Range Rover.";
+                    serviceRecommendation.innerHTML = "For a complete luxury experience, we recommend utilizing Range Rover's advanced infotainment system and driver assistance features.";
+                    break;
+                case 'armchair clock suitcase':
+                    resultText.innerHTML = "Congratulations! Your preference for timeless luxury and refined elegance align perfectly with the Range Rover Evoque.";
+                    serviceRecommendation.innerHTML = "Take advantage of Range Rover Evoque's connected car services for seamless urban navigation and remote vehicle control.";
+                    break;
+                case 'armchair gadgets cityscape':
+                    resultText.innerHTML = "Congratulations! Your preference for timeless luxury and refined elegance align perfectly with the Range Rover Evoque.";
+                    serviceRecommendation.innerHTML = "Take advantage of Range Rover Evoque's connected car services for seamless urban navigation and remote vehicle control.";
+                    break;
+                case 'armchair gadgets suitcase':
+                    resultText.innerHTML = "Congratulations! Your adventurous spirit and desire to conquer challenging terrain make the Defender the perfect choice for you.";
+                    serviceRecommendation.innerHTML = "Explore the Defender's off-road capabilities with its telematics services and over-the-air updates for optimum performance.";
+                    break;
+                case 'sculpture clock cityscape':
+                    resultText.innerHTML = "Congratulations! Your preference for modern innovation, conquering trails, and luxury, we recommend the Range Rover Sport.";
+                    serviceRecommendation.innerHTML = "Explore the Range Rover Sport's sporty performance and luxury features for an exhilarating driving experience.";
+                    break;
+                case 'sculpture clock suitcase':
+                    resultText.innerHTML = "Congratulations! Your preference for modern innovation, conquering trails, and versatility, we recommend the Range Rover Sport.";
+                    serviceRecommendation.innerHTML = "Explore the Range Rover Sport's sporty performance and luxury features for an exhilarating driving experience.";
+                    break;
+                case 'sculpture gadgets cityscape':
+                    resultText.innerHTML = "Congratulations! Your preference for modern innovation, conquering trails, and luxury, we recommend the Range Rover Sport.";
+                    serviceRecommendation.innerHTML = "Explore the Range Rover Sport's sporty performance and luxury features for an exhilarating driving experience.";
+                    break;
+                case 'sculpture gadgets suitcase':
+                    resultText.innerHTML = "Congratulations! Your need for versatility and practicality is met with the Discovery.";
+                    serviceRecommendation.innerHTML = "Discover the Discovery's connected car services and infotainment features for family-friendly road trips and daily adventures.";
+                    break;
+                default:
+                    resultText.innerHTML = "Invalid choice!";
+            }
+        }
+
+        function restart() {
+            choices = [];
+            document.getElementById('result').style.display = 'none';
+            document.getElementById('question1').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
